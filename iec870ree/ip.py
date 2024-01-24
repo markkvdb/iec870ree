@@ -48,7 +48,8 @@ class Ip(PhysicalLayer):
         """Disconnects
         """
         self.alive.clear()
-        self.thread.join(5)
+        if self.thread.is_alive():
+            self.thread.join(5)
         logger.debug("Thread joined..")
         if self.connection:
             self.connection.close()
